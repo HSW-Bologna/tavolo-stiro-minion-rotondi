@@ -9,21 +9,28 @@
 #include "peripherals/phase_cut.h"
 
 
-#define MINION_ADDRESS 1
+#define MINION_ADDRESS                  1
 
-#define INPUT_REGISTER_FW_VERSION 0
-#define INPUT_REGISTER_INPUTS 1
-#define INPUT_REGISTER_LIVELLO1_H2O 2
-#define INPUT_REGISTER_LIVELLO2_H2O 3
-#define INPUT_REGISTER_PTC1_ADC 4
-#define INPUT_REGISTER_PTC2_ADC 5
-#define INPUT_REGISTER_PTC1_TEMP 6
-#define INPUT_REGISTER_PTC2_TEMP 7
-#define INPUT_REGISTER_NUM 8
+#define INPUT_REGISTER_FW_VERSION       0
+#define INPUT_REGISTER_INPUTS           1
+#define INPUT_REGISTER_LIVELLO1_H2O     2
+#define INPUT_REGISTER_LIVELLO2_H2O     3
+#define INPUT_REGISTER_PTC1_ADC         4
+#define INPUT_REGISTER_PTC2_ADC         5
+#define INPUT_REGISTER_PTC1_TEMP        6
+#define INPUT_REGISTER_PTC2_TEMP        7
 
-#define HOLDING_REGISTER_OUTPUTS 0
-#define HOLDING_REGISTER_FAN_CONTROL 1
-#define HOLDING_REGISTER_NUM 2
+#define INPUT_REGISTER_NUM              8
+
+
+
+#define HOLDING_REGISTER_OUTPUTS        0
+#define HOLDING_REGISTER_FAN_CONTROL    1
+
+#define HOLDING_REGISTER_NUM            2
+
+
+
 
 
 static ModbusError register_callback(const ModbusSlave *status, const ModbusRegisterCallbackArgs *args,
