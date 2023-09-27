@@ -24,7 +24,6 @@ int main(void) {
     
     controller_init();
     
-    
     for (;;) {
         if (is_expired(input_ts, get_millis(), 10)) {
             if (input_take_reading()) {

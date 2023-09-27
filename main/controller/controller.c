@@ -48,6 +48,7 @@ void controller_init(void) {
 
 void controller_manage(void) {
     static timestamp_t rs485_ts = 0;
+    static timestamp_t last_communication_ts = 0;
 
     if (is_expired(rs485_ts, get_millis(), 5)) {
         uint8_t buffer[256] = {0};
@@ -65,6 +66,7 @@ void controller_manage(void) {
                 } else {
                     // ESP_LOGD(TAG, "Empty response");
                 }
+                last_communication_ts = get_millis();
             } else if (err.error != MODBUS_ERROR_ADDRESS && err.error != MODBUS_ERROR_CRC) {
                 // ESP_LOGW(TAG, "Invalid request with source %i and error %i", err.source, err.error);
                 // ESP_LOG_BUFFER_HEX(TAG, buffer, len);
@@ -72,6 +74,19 @@ void controller_manage(void) {
         }
 
         rs485_ts = get_millis();
+    }
+    
+    // If no command is received in 2 seconds shut down everything
+    if (is_expired(last_communication_ts, get_millis, 2000UL)) {
+        RELAY_CLEAR(RELAY_1);
+        RELAY_CLEAR(RELAY_2);
+        RELAY_CLEAR(RELAY_3);
+        RELAY_CLEAR(RELAY_4);
+        RELAY_CLEAR(RELAY_5);
+        RELAY_CLEAR(RELAY_6);
+        RELAY_CLEAR(RELAY_7);
+        phase_cut_set_percentage(PHASE_CUT_ASPIRATION, 0);
+        phase_cut_set_percentage(PHASE_CUT_BLOW, 0);
     }
 }
 
