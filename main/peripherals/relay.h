@@ -3,10 +3,30 @@
 
 
 #include <stdint.h>
+#include "hardwareprofile.h"
+
+
+
+
+
+#define POMPA_H2O_VAPORE            HAP_POMPA_LAT   // 01 - TRIAC
+
+#define RISCALDAMENTO_PIANO         HAP_REL6_LAT    // 02
+#define RISCALDAMENTO_H2O_VAPORE    HAP_REL5_LAT    // 03
+#define RISCALDAMENTO_BRACCIOLO     HAP_REL2_LAT    // 04
+
+#define FERRO_1                     HAP_REL1_LAT    // 05
+#define FERRO_2                     HAP_REL4_LAT    // 06
+#define LUCE                        HAP_REL3_LAT    // 07
+
+#define RECUPERATORE                HAP_REL5_LAT    // XX
+
 
 
 #define RELAY_SET(r)   relay_update(r, 1);
 #define RELAY_CLEAR(r) relay_update(r, 0);
+
+
 
 
 
@@ -18,7 +38,8 @@ typedef enum {
     RELAY_5,
     RELAY_6,
     RELAY_7,
-#define RELAY_NUM RELAY_7+1
+    RELAY_8,
+#define RELAY_NUM RELAY_8+1
 } relay_t;
 
 
@@ -26,6 +47,5 @@ void    relay_init(void);
 void    relay_update(relay_t relay, uint8_t value);
 uint8_t relay_read(relay_t relay);
 uint8_t relay_read_map(void);
-
 
 #endif

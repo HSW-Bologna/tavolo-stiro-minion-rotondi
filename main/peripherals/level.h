@@ -13,5 +13,4 @@ void level_init(void);
 uint16_t level_get_adc_value(level_t level);
 void level_take_readings(void);
 
-
 #endif

@@ -9,21 +9,28 @@
 #include "peripherals/phase_cut.h"
 
 
-#define MINION_ADDRESS 1
+#define MINION_ADDRESS                  1
 
-#define INPUT_REGISTER_FW_VERSION 0
-#define INPUT_REGISTER_INPUTS 1
-#define INPUT_REGISTER_LIVELLO1_H2O 2
-#define INPUT_REGISTER_LIVELLO2_H2O 3
-#define INPUT_REGISTER_PTC1_ADC 4
-#define INPUT_REGISTER_PTC2_ADC 5
-#define INPUT_REGISTER_PTC1_TEMP 6
-#define INPUT_REGISTER_PTC2_TEMP 7
-#define INPUT_REGISTER_NUM 8
+#define INPUT_REGISTER_FW_VERSION       0
+#define INPUT_REGISTER_INPUTS           1
+#define INPUT_REGISTER_LIVELLO1_H2O     2
+#define INPUT_REGISTER_LIVELLO2_H2O     3
+#define INPUT_REGISTER_PTC1_ADC         4
+#define INPUT_REGISTER_PTC2_ADC         5
+#define INPUT_REGISTER_PTC1_TEMP        6
+#define INPUT_REGISTER_PTC2_TEMP        7
 
-#define HOLDING_REGISTER_OUTPUTS 0
-#define HOLDING_REGISTER_FAN_CONTROL 1
-#define HOLDING_REGISTER_NUM 2
+#define INPUT_REGISTER_NUM              8
+
+
+
+#define HOLDING_REGISTER_OUTPUTS        0
+#define HOLDING_REGISTER_FAN_CONTROL    1
+
+#define HOLDING_REGISTER_NUM            2
+
+
+
 
 
 static ModbusError register_callback(const ModbusSlave *status, const ModbusRegisterCallbackArgs *args,
@@ -77,7 +84,7 @@ void controller_manage(void) {
     }
     
     // If no command is received in 2 seconds shut down everything
-    if (is_expired(last_communication_ts, get_millis, 2000UL)) {
+    if (is_expired(last_communication_ts, get_millis(), 2000UL)) {
         RELAY_CLEAR(RELAY_1);
         RELAY_CLEAR(RELAY_2);
         RELAY_CLEAR(RELAY_3);
@@ -168,6 +175,7 @@ static ModbusError register_callback(const ModbusSlave *minion, const ModbusRegi
                             relay_update(RELAY_5, (args->value & 0x10) > 0);
                             relay_update(RELAY_6, (args->value & 0x20) > 0);
                             relay_update(RELAY_7, (args->value & 0x40) > 0);
+                            relay_update(RELAY_8, (args->value & 0x80) > 0);
                             break;
                         case HOLDING_REGISTER_FAN_CONTROL: {
                             uint8_t percentage_aspiration = args->value & 0xFF;

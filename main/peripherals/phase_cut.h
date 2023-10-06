@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 
+
 typedef enum {
     PHASE_CUT_ASPIRATION = 0,
     PHASE_CUT_BLOW,
@@ -13,5 +14,6 @@ typedef enum {
 
 
 void phase_cut_init(void);
+void phase_cut_set_percentage(phase_cut_t phase_cut, uint8_t percentage);
 
 #endif

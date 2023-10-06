@@ -44,6 +44,7 @@ void phase_cut_set_percentage(phase_cut_t phase_cut, uint8_t percentage) {
 void phase_cut_init(void)
 {
     HAP_INT0_TRIS = SYSTEM_TRIS_INPUT;
+    
     HAP_ASP_TRIS = SYSTEM_TRIS_OUTPUT;
     HAP_SOFF_TRIS = SYSTEM_TRIS_OUTPUT;
     
@@ -53,6 +54,9 @@ void phase_cut_init(void)
     //    IFS1bits.CNIF = 0;
     //    IPC4bits.CNIP = 0x06;
     //    IEC1bits.CNIE = 1;
+    
+    
+    
     IOCPBbits.IOCPB7 = 1; /* Interrupt trigger su transizioni low-to-high */
     IOCNBbits.IOCNB7 = 1; /* Interrupt trigger su transizioni high-to-low */
 
@@ -76,6 +80,7 @@ void phase_cut_init(void)
     IFS0bits.T2IF   = 0;
     IEC0bits.T2IE   = 1;            // Enable timer 2 interrupt
 }
+
 
 
 void __attribute__((interrupt, no_auto_psv)) _IOCInterrupt()
