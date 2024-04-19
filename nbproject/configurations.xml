@@ -64,6 +64,7 @@
           <itemPath>main/peripherals/input.h</itemPath>
           <itemPath>main/peripherals/level.h</itemPath>
           <itemPath>main/peripherals/phase_cut.h</itemPath>
+          <itemPath>main/peripherals/heartbit.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="services" projectFiles="true">
           <itemPath>main/services/system_time.h</itemPath>
@@ -119,6 +120,7 @@
           <itemPath>main/peripherals/input.c</itemPath>
           <itemPath>main/peripherals/level.c</itemPath>
           <itemPath>main/peripherals/phase_cut.c</itemPath>
+          <itemPath>main/peripherals/heartbit.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="services" projectFiles="true">
           <itemPath>main/services/lightmodbus-impl.c</itemPath>
@@ -144,7 +146,7 @@
         <targetDevice>PIC24FJ256GA705</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.36</languageToolchainVersion>
         <platform>2</platform>

@@ -92,6 +92,10 @@ void controller_manage(void) {
         RELAY_CLEAR(RELAY_5);
         RELAY_CLEAR(RELAY_6);
         RELAY_CLEAR(RELAY_7);
+        RELAY_CLEAR(RELAY_8);
+        RELAY_CLEAR(RELAY_9);
+        RELAY_CLEAR(RELAY_10);
+        RELAY_CLEAR(RELAY_11);
         phase_cut_set_percentage(PHASE_CUT_ASPIRATION, 0);
         phase_cut_set_percentage(PHASE_CUT_BLOW, 0);
     }
@@ -176,6 +180,9 @@ static ModbusError register_callback(const ModbusSlave *minion, const ModbusRegi
                             relay_update(RELAY_6, (args->value & 0x20) > 0);
                             relay_update(RELAY_7, (args->value & 0x40) > 0);
                             relay_update(RELAY_8, (args->value & 0x80) > 0);
+                            relay_update(RELAY_9, (args->value & 0x100) > 0);
+                            relay_update(RELAY_10, (args->value & 0x200) > 0);
+                            relay_update(RELAY_11, (args->value & 0x400) > 0);
                             break;
                         case HOLDING_REGISTER_FAN_CONTROL: {
                             uint8_t percentage_aspiration = args->value & 0xFF;

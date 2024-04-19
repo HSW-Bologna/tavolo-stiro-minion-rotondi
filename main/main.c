@@ -81,6 +81,7 @@ const unsigned char versione_prg[] = "V:00.1 D:17/09/2023";
 #include "peripherals/input.h"
 #include "peripherals/level.h"
 #include "peripherals/timer.h"
+#include "peripherals/heartbit.h"
 #include "services/system_time.h"
 
 
@@ -89,6 +90,7 @@ int main(void) {
     timestamp_t adc_ts = 0;
 
     system_init();
+    heartbit_init();
     relay_init();
     input_init();
     timer_init();
@@ -118,6 +120,7 @@ int main(void) {
             adc_ts = get_millis();
         }
         
+        heartbit_manage(get_millis());
         rs485_display_manage();
         controller_manage();
         Idle();

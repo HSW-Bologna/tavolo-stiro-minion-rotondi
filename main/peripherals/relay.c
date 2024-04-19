@@ -27,6 +27,10 @@ void relay_init(void) {
     HAP_REL6_TRIS = SYSTEM_TRIS_OUTPUT;
     HAP_REL7_TRIS = SYSTEM_TRIS_OUTPUT;
     
+    HAP_TAGLIOLA_A_TRIS = SYSTEM_TRIS_OUTPUT;
+    HAP_TAGLIOLA_B_TRIS = SYSTEM_TRIS_OUTPUT;
+    HAP_AUX_M_TRIS = SYSTEM_TRIS_OUTPUT;
+    
     HAP_POMPA_TRIS = SYSTEM_TRIS_OUTPUT;    // TRIAC POMPA ON/OFF
 
     
@@ -55,6 +59,12 @@ void relay_update(relay_t relay, uint8_t value) {
             LUCE = value;
         case RELAY_8:
             RECUPERATORE = value;
+        case RELAY_AUX:
+            HAP_AUX_M_LAT = value;
+        case RELAY_TAGLIOLA_A:
+            HAP_TAGLIOLA_A_LAT = value;
+        case RELAY_TAGLIOLA_B:
+            HAP_TAGLIOLA_B_LAT = value;
         default:
             break;
     }
@@ -79,6 +89,12 @@ uint8_t relay_read(relay_t relay) {
             return LUCE;
         case RELAY_8:
             return RECUPERATORE;
+        case RELAY_AUX:
+            return HAP_AUX_M_LAT;
+        case RELAY_TAGLIOLA_A:
+            return HAP_TAGLIOLA_A_LAT;
+        case RELAY_TAGLIOLA_B:
+            return HAP_TAGLIOLA_B_LAT;
         default:
             return 0;
     }
